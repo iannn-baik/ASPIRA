@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
@@ -23,6 +24,15 @@ Route::post('/laporan/lanjut', [LaporanController::class, 'lanjut'])->name('lapo
 | Auth
 |--------------------------------------------------------------------------
 */
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -34,6 +44,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')->name('logout');
 
+<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Mahasiswa (wajib login). Buat laporan baru bisa diakses setelah login.
@@ -56,4 +67,16 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
+=======
+Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasiswa.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('mahasiswa.dashboard');
+    })->name('dashboard');
+});
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
 });

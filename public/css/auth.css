@@ -386,6 +386,7 @@ body {
         margin-top: 40px;
     }
 }
+<<<<<<< HEAD
 
 /* ===== Login tanpa panel ilustrasi, latar biru lembut ===== */
 .login-wrapper {
@@ -421,3 +422,5 @@ body {
 @media (max-width: 480px) {
     .login-card { padding: 30px 22px 24px; }
 }
+=======
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae

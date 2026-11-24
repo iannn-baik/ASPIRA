@@ -11,6 +11,39 @@
 
 <div class="login-wrapper">
 
+<<<<<<< HEAD
+=======
+    <section class="illustration">
+        <div class="brand">
+            <div class="brand-icon">A</div>
+            <span>ASPIRA</span>
+        </div>
+
+        <div class="illustration-content">
+            <div class="illustration-circle">
+                <div class="illustration-card">
+                    <div class="mini-icon">✓</div>
+                    <div class="mini-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="mini-status">Laporan terkirim</div>
+                </div>
+                <div class="floating-icon">✦</div>
+                <div class="floating-icon second">✉</div>
+            </div>
+
+            <h1>Suarakan Aspirasi,<br>Wujudkan Perubahan.</h1>
+            <p>Sampaikan pengaduan dan aspirasi kamu untuk menciptakan lingkungan kampus yang lebih baik.</p>
+        </div>
+
+        <div class="illustration-footer">
+            © 2026 ASPIRA Universitas Lampung
+        </div>
+    </section>
+
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
     <main class="login-section">
         <div class="login-card">
 
@@ -25,12 +58,15 @@
                 <p>Silakan masuk untuk melanjutkan ke layanan ASPIRA.</p>
             </div>
 
+<<<<<<< HEAD
             @if (session('url.intended') && !$errors->any())
                 <div class="alert" style="background:#eef6ff;border-color:#cfe4f8;color:#176daf;">
                     Silakan masuk terlebih dahulu untuk membuat laporan.
                 </div>
             @endif
 
+=======
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
             @if ($errors->any())
                 <div class="alert">
                     {{ $errors->first() }}
@@ -82,10 +118,13 @@
                 <a href="{{ route('register') }}">Daftar sekarang</a>
             </div>
 
+<<<<<<< HEAD
             <div class="register-link">
                 <a href="{{ route('beranda') }}">← Kembali ke beranda</a>
             </div>
 
+=======
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
             <div class="login-footer">
                 ASPIRA · Layanan Aspirasi dan Pengaduan Mahasiswa
             </div>

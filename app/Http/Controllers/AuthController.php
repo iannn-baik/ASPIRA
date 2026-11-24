@@ -38,8 +38,12 @@ class AuthController extends Controller
                 return redirect()->route('admin.dashboard');
             }
 
+<<<<<<< HEAD
             // Kembali ke halaman yang tadi dituju (mis. form Buat Laporan)
             return redirect()->intended(route('mahasiswa.dashboard'));
+=======
+            return redirect()->route('mahasiswa.dashboard');
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
         }
 
         return back()
@@ -71,7 +75,11 @@ class AuthController extends Controller
         Auth::login($akun);
         $request->session()->regenerate();
 
+<<<<<<< HEAD
         return redirect()->intended(route('mahasiswa.dashboard'));
+=======
+        return redirect()->route('mahasiswa.dashboard');
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
     }
 
     public function logout(Request $request)
@@ -81,6 +89,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+<<<<<<< HEAD
         return redirect()->route('beranda');
+=======
+        return redirect()->route('login');
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
     }
 }

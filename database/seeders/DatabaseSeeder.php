@@ -2,14 +2,20 @@
 
 namespace Database\Seeders;
 
+<<<<<<< HEAD
 use App\Models\InstansiTujuan;
 use App\Models\JenisPengajuan;
 use App\Models\Kategori;
 use App\Models\StatusLaporan;
+=======
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+<<<<<<< HEAD
     /**
      * Data master untuk form laporan. Aman dijalankan berulang kali.
      */
@@ -35,5 +41,20 @@ class DatabaseSeeder extends Seeder
         foreach (['Menunggu', 'Diproses', 'Selesai', 'Ditolak'] as $nama) {
             StatusLaporan::firstOrCreate(['nama_status' => $nama]);
         }
+=======
+    use WithoutModelEvents;
+
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+>>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
     }
 }
