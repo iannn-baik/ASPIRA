@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -21,7 +22,6 @@
         <div class="menu-label">MENU UTAMA</div>
 
         <nav>
-<<<<<<< HEAD
             <a href="{{ route('beranda') }}" class="menu">
                 <span>⌂</span> Beranda
             </a>
@@ -32,18 +32,9 @@
                 <span>＋</span> Buat Laporan
             </a>
             <a href="{{ route('laporan.index') }}" class="menu">
-=======
-            <a href="{{ route('mahasiswa.dashboard') }}" class="menu active">
-                <span>▦</span> Dashboard
-            </a>
-            <a href="#" class="menu">
-                <span>＋</span> Buat Laporan
-            </a>
-            <a href="#" class="menu">
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
                 <span>▤</span> Riwayat Laporan
             </a>
-            <a href="#" class="menu">
+            <a href="{{ route('faq') }}" class="menu">
                 <span>◉</span> Informasi
             </a>
         </nav>
@@ -85,13 +76,42 @@
         </header>
 
         <section class="content">
+            @php
+                $laporanQuery = \App\Models\Laporan::where(
+                    'id_akun',
+                    auth()->user()->id_akun
+                );
+
+                $totalLaporan = (clone $laporanQuery)->count();
+
+                $menunggu = (clone $laporanQuery)
+                    ->whereHas('status', fn($q) =>
+                        $q->where('nama_status', 'Menunggu')
+                    )->count();
+
+                $diproses = (clone $laporanQuery)
+                    ->whereHas('status', fn($q) =>
+                        $q->where('nama_status', 'Diproses')
+                    )->count();
+
+                $selesai = (clone $laporanQuery)
+                    ->whereHas('status', fn($q) =>
+                        $q->where('nama_status', 'Selesai')
+                    )->count();
+
+                $reports = \App\Models\Laporan::with(['status', 'jenis'])
+                    ->where('id_akun', auth()->user()->id_akun)
+                    ->latest('tanggal_laporan')
+                    ->take(5)
+                    ->get();
+            @endphp
+
             <div class="welcome">
                 <div>
                     <p class="eyebrow">DASHBOARD MAHASISWA</p>
                     <h1>Halo, {{ auth()->user()->nama_lengkap }}!</h1>
                     <p>Selamat datang di layanan aspirasi dan pengaduan mahasiswa.</p>
                 </div>
-
                 <div class="welcome-icon">✦</div>
             </div>
 
@@ -100,11 +120,9 @@
                     <h2>Ringkasan Laporan</h2>
                     <p>Pantau perkembangan laporan yang kamu kirimkan.</p>
                 </div>
-<<<<<<< HEAD
-                <a href="{{ route('laporan.create') }}" class="primary-button">＋ Buat Laporan</a>
-=======
-                <a href="#" class="primary-button">＋ Buat Laporan</a>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                <a href="{{ route('laporan.create') }}" class="primary-button">
+                    ＋ Buat Laporan
+                </a>
             </div>
 
             <div class="stats">
@@ -112,11 +130,7 @@
                     <div class="stat-icon blue">▤</div>
                     <div>
                         <span>Total Laporan</span>
-<<<<<<< HEAD
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->user()->id_akun)->count() }}</h2>
-=======
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->id())->count() }}</h2>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                        <h2>{{ $totalLaporan }}</h2>
                     </div>
                 </div>
 
@@ -124,11 +138,7 @@
                     <div class="stat-icon orange">◷</div>
                     <div>
                         <span>Menunggu</span>
-<<<<<<< HEAD
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->user()->id_akun)->whereHas('status', fn($q) => $q->where('nama_status', 'Menunggu'))->count() }}</h2>
-=======
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->id())->whereHas('statusLaporan', fn($q) => $q->where('nama_status', 'Menunggu'))->count() }}</h2>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                        <h2>{{ $menunggu }}</h2>
                     </div>
                 </div>
 
@@ -136,11 +146,7 @@
                     <div class="stat-icon purple">↻</div>
                     <div>
                         <span>Diproses</span>
-<<<<<<< HEAD
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->user()->id_akun)->whereHas('status', fn($q) => $q->where('nama_status', 'Diproses'))->count() }}</h2>
-=======
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->id())->whereHas('statusLaporan', fn($q) => $q->where('nama_status', 'Diproses'))->count() }}</h2>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                        <h2>{{ $diproses }}</h2>
                     </div>
                 </div>
 
@@ -148,11 +154,7 @@
                     <div class="stat-icon green">✓</div>
                     <div>
                         <span>Selesai</span>
-<<<<<<< HEAD
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->user()->id_akun)->whereHas('status', fn($q) => $q->where('nama_status', 'Selesai'))->count() }}</h2>
-=======
-                        <h2>{{ \App\Models\Laporan::where('id_akun', auth()->id())->whereHas('statusLaporan', fn($q) => $q->where('nama_status', 'Selesai'))->count() }}</h2>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                        <h2>{{ $selesai }}</h2>
                     </div>
                 </div>
             </div>
@@ -162,46 +164,26 @@
                     <h2>Laporan Terbaru</h2>
                     <p>Daftar laporan yang sudah kamu kirimkan.</p>
                 </div>
-<<<<<<< HEAD
-                <a href="{{ route('laporan.index') }}" class="text-link">Lihat semua →</a>
-=======
-                <a href="#" class="text-link">Lihat semua →</a>
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
+                <a href="{{ route('laporan.index') }}" class="text-link">
+                    Lihat semua →
+                </a>
             </div>
 
             <div class="report-container">
-                @php
-<<<<<<< HEAD
-                    $reports = \App\Models\Laporan::with(['status', 'jenis'])
-=======
-                    $reports = \App\Models\Laporan::with(['statusLaporan', 'jenisPengajuan'])
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
-                        ->where('id_akun', auth()->id())
-                        ->latest('tanggal_laporan')
-                        ->take(5)
-                        ->get();
-                @endphp
-
                 @forelse($reports as $report)
                     <div class="report-item">
                         <div class="report-icon">▤</div>
+
                         <div class="report-detail">
                             <strong>{{ $report->judul }}</strong>
                             <small>
-<<<<<<< HEAD
                                 {{ $report->jenis->nama_jenis ?? 'Laporan' }}
-=======
-                                {{ $report->jenisPengajuan->nama_jenis ?? 'Laporan' }}
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
                                 · {{ $report->tanggal_laporan }}
                             </small>
                         </div>
+
                         <span class="status">
-<<<<<<< HEAD
                             {{ $report->status->nama_status ?? 'Belum ada status' }}
-=======
-                            {{ $report->statusLaporan->nama_status ?? 'Belum ada status' }}
->>>>>>> 8539ca7d03a75e9fda300092635991690f3976ae
                         </span>
                     </div>
                 @empty
